@@ -142,13 +142,11 @@ html {background-color:inherit;}
 
 /* main ui */
 #currentsong, #currentalbum, #currentartist, #format-bitrate, #elapsed, #countdown-display {display:block;}
-#extra-tags-display {color:var(--textvariant);padding-top:.25em;text-align:center;display:block;cursor:pointer;}
-#currentsong {font-size:1.5em;margin-top:0;font-weight:700;color:var(--accentxts);word-wrap:break-word;cursor:pointer;}
-#currentalbum,
-#currentartist {font-size:1.25em;margin-top:1.65rem;font-weight:500;color:var(--textvariant);}
-#currentartist 	{cursor:pointer;}
-#currentalbum-div {display:inline;justify-content: center;}
-#currentartist-div {display:inline-flex;justify-content: center;}
+#extra-tags-display {color:var(--textvariant);padding-top:.5em;text-align:center;display:block;cursor:pointer;}
+#currentsong {font-size:1.5em;padding-top:.5em;font-weight:bold;color:var(--accentxts);word-wrap:break-word;cursor:pointer;}
+#currentalbum, #currentartist {font-size:1.25em;padding-top:.5rem;cursor:pointer;font-weight:500;color:var(--textvariant);}
+#currentalbum-div,
+#currentartist-div {display:flex;justify-content: center;}
 #playqueue-position, #format-bitrate {color:inherit;opacity:.55;}
 .container-playback {padding:0px;color:inherit;margin-top:env(safe-area-inset-top);}
 .no-fluid {display:flex;flex-direction:row;}
@@ -658,7 +656,7 @@ img.lib-artistart {
 	border-radius:var(--img-border-radius);
 }
 #ss-currentsong {font-weight:600;}
-#ss-currentsong, #ss-currentalbum-div, #ss-extra-metadata {margin-top:1em;}
+#ss-currentsong, #ss-currentalbum-div, #ss-extra-metadata {margin-top:.5em;}
 .ss-backdrop {min-width:100vw;min-height:100vh;max-width:unset;transform:translate(-50%, -50%);background-position:center center;position:relative;top:50vh;left:50vw;}
 .ss-coverart {position:fixed;top:1.5em;width:100%;}
 /* CoverView Default */
@@ -680,11 +678,11 @@ body.cv #screen-saver {display:block !important;}
 /* CoverView Playbar */
 body.cvpb #playbar {box-shadow:none;color:#eee;}
 body.cvpb #playbar-timeline {top:50%;width:35%;transform:translate(-50%, -50%);}
-body.cvpb #cv-playqueue-btn {display:block;}
+body.cvpb #cv-playqueue-btn {display:none;}
 body.cvpb #random-album,
 body.cvpb #ss-countdown {display:none!important;}
-body.cvpb #playbar-toggles .add-item-to-favorites {display:block!important;}
-#cv-playqueue {display:none;position:absolute;top:1.5em;right:.1em;width:40vmin;z-index:2;height:calc(100% - 2.75em - 45px);overflow:auto;-webkit-overflow-scrolling:touch;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);background:rgba(32,32,32,.75);}
+body.cvpb #playbar-toggles .add-item-to-favorites {display:none!important;}
+#cv-playqueue {display:none;position:absolute;top:1.5em;right:.1em;width:40vmin;z-index:2;height:calc(100% - 2.75em - 45px);overflow:auto;-webkit-overflow-scrolling:touch;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);background:rgba(32,32,32,.25);}
 /* CoverView Wide */
 body.cvwide #ss-currentsong {font-size:1.4em;}
 body.cvwide #ss-coverart-url img {
@@ -709,12 +707,8 @@ body.cvwide-xmeta #ss-extra-metadata-output-format.ss-npicon:before {
 	background: var(--npicon) no-repeat 100%;
 	background-size: 1.25em;
 }
-body.cvwide #ss-currentartist {font-size:1.2em;margin-top:1em;}
-body:not(.cvpb) #ss-coverart-url img {
-	margin-top:1.5em;
-	border-style:none;
-	border-radius:var(--img-border-radius);
-}
+body.cvwide #ss-currentartist {font-size:1.2em;margin-top:.5em;}
+body:not(.cvpb) #ss-coverart-url img {margin-top:1.5em;}
 body:not(.cvwide) #ss-metadata {width:98%;margin:0 auto;}
 body:not(.cvwide) #ss-countdown {margin-top:1em;}
 body.cv #playback-controls,
@@ -892,8 +886,8 @@ body.cv .timeline-thm input[type='range']::-webkit-slider-thumb {
 .inner-progress {background-color:var(--trackfill);height:3px;width:0%;margin-top:-3px;}
 .timeline-bg {background-color:var(--timecolor);height:3px;top:50%;width:100%;position:relative;min-height:3px;margin-top:-3px;}
 #playbar-time {width:100%;z-index:100;font-size:.8rem;margin-top:-15px;line-height:15px;}
-#playbar-countdown, #m-countdown {position:relative;float:left;left:-3rem;}
-#playbar-total, #m-total {position:relative;float:right;left:3rem;}
+#playbar-countdown, #m-countdown {position:relative;float:left;left:-4rem;}
+#playbar-total, #m-total {position:relative;float:right;left:4rem;}
 #playbar-mtime,
 #playbar-mtotal {display:none;}
 #playbar-countdown.radio {float:right;left:3em;}
@@ -914,7 +908,7 @@ body.cv .timeline-thm input[type='range']::-webkit-slider-thumb {
 }
 #playbar-currentsong, #playbar-currentalbum {overflow:hidden;text-overflow:ellipsis;word-wrap:break-word;}
 #playbar-currentsong {font-weight:600;}
-#playbar-time, #playbar-total {font-size:.8rem;}
+#playbar-time, #playbar-total {font-size:1.2rem;}
 #playbar-controls {position:absolute;left:.5rem;top:50%;transform:translate(0, -50%);opacity:1;}
 #playbar-controls .btn {font-size:2rem;padding:1rem;}
 #playbar-controls .next,
@@ -927,10 +921,10 @@ body.cv .timeline-thm input[type='range']::-webkit-slider-thumb {
 #playbar-toggles {position:absolute;display:flex;flex-wrap:wrap;right:.5rem;top:50%;transform:translate(0, -50%);}
 #playbar-toggles .btn {padding:0;margin:0 0.45rem;height:2.1rem;width:2.1rem;border-radius:50%;}
 #playbar-toggles .btn-primary {color:var(--accentxts);}
-#playbar-toggles i {font-size:1.1rem;margin-top:1px;}
+#playbar-toggles i {font-size:1.5rem;margin-top:1px;}
 #playbar-toggles .coverview i {font-size:.9rem;}
 #playbar-volume-popup-btn {width:2.5rem!important;}
-.mpd-volume-level {font-size:1.1rem;margin-left:0;}
+.mpd-volume-level {font-size:1.5rem;margin-left:0;}
 #m-radio {background-image:var(--radiobadge);background-position:center center;background-repeat:no-repeat;background-size:contain;width:20%;height:15px;left:50%;transform:translate(-50%, -50%);display:none;}
 #m-radio {position:relative;transform:translate(-50%, 0);margin-top:.5em;}
 /* for hide/show Genres column in Library Tag view */
@@ -971,6 +965,7 @@ body.cv .timeline-thm input[type='range']::-webkit-slider-thumb {
 #playback-panel.cv #playbtns .add-item-to-favorites, #playback-panel.cv #playbtns {display:inline-block;font-size:1.1em;margin:0 1em;}
 #playback-panel.cv #togglebtns .repeat, #playback-panel.cv #togglebtns .toggle-song {display:inline-block;}
 #playback-panel.cv #container-playqueue {margin-top:0;}
+#playbar-toggles .playback-context-menu {display: none;}
 
 @keyframes fadeIn {0% {opacity: 0;} 100% {opacity: 1;}}
 @keyframes spin {from {transform:rotate(0def);} to {transform:rotate(360deg);}}

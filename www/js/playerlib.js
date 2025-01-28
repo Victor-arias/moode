@@ -1244,8 +1244,12 @@ function renderUI() {
                 $('#countdown-sample-rate, #songsand-sample-rate, #ss-extra-metadata').text(bitRate);
         	} else {
                 $('#extra-tags-display').html(formatExtraTagsString());
-                $('#ss-extra-metadata').text(MPD.json['encoded']);
-                $('#songsand-sample-rate').text('Track ' + MPD.json['track'] + ' • ' + MPD.json['encoded']);
+                $('#ss-extra-metadata').html(`
+                    <div>${MPD.json['date'].slice(0,4)}</div>
+                    <div>${MPD.json['genre']}</div>
+                    <div>${MPD.json['encoded']}</div>
+                `);
+                $('#songsand-sample-rate').text(MPD.json['encoded']);
                 $('#countdown-sample-rate').text(
                     (typeof(MPD.json['encoded']) === 'undefined' ? '' : MPD.json['encoded'].split(',')[0])
                 );
@@ -1281,12 +1285,10 @@ function renderUI() {
             // - #currentsong = MPD.json['title']
             // - #currentartist = MPD.json['artist']
             // Playback
-            $('#currentalbum').html('');
+            $('#currentalbum').html('<span class="playback-hd-badge"></span>' + MPD.json['album']);
     		$('#currentsong').html(genSearchUrl(MPD.json['artist'] == 'Unknown artist' ? MPD.json['albumartist'] : MPD.json['artist'], MPD.json['title'], MPD.json['album']));
             $('#currentartist').html(
-                '<span class="playback-hd-badge"></span>' + MPD.json['album'] +
-                (MPD.json['file'] == null ? '' : ' - ') +
-                (MPD.json['artist'] == 'Unknown artist' ? MPD.json['albumartist'] : MPD.json['artist'])
+                 (MPD.json['artist'] == 'Unknown artist' ? MPD.json['albumartist'] : MPD.json['artist'])
             );
             // Playbar and CoverView
             var artist = (MPD.json['artist'] == 'Unknown artist' ? MPD.json['albumartist'] : MPD.json['artist']);
@@ -3704,7 +3706,7 @@ $('#btn-preferences-update').click(function(e){
 
             // CoverView
             'scnsaver_timeout': SESSION.json['scnsaver_timeout'],
-            'scnsaver_whenplaying' = SESSION.json['scnsaver_whenplaying'],
+            'scnsaver_whenplaying' : SESSION.json['scnsaver_whenplaying'],
             'auto_coverview': SESSION.json['auto_coverview'],
             'scnsaver_style': SESSION.json['scnsaver_style'],
             'scnsaver_mode': SESSION.json['scnsaver_mode'],
