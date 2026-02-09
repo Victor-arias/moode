@@ -100,15 +100,16 @@ jQuery(document).ready(function ($) {
         getThumbHW();
 
         // Initiate loads
-        renderRadioView(false); // False = don't run lazylode() since it's going to be run as part of makeActive downstream
-        if (SESSION.json['lib_fv_only'] == 'off') {
-            loadLibrary(); // Tag and Album views
+        if (!GLOBAL.performanceMode) {
+            renderRadioView(false); // False = don't run lazylode() since it's going to be run as part of makeActive downstream
+            if (SESSION.json['lib_fv_only'] == 'off') {
+                loadLibrary(); // Tag and Album views
+            }
+            renderPlaylistView();
+            $.getJSON('command/music-library.php?cmd=lsinfo', { 'path': '' }, function (data) {
+                renderFolderView(data, '');
+            });
         }
-        if (!GLOBAL.chromium) loadLibrary(); // Tag and Album views
-        renderPlaylistView();
-        $.getJSON('command/music-library.php?cmd=lsinfo', { 'path': '' }, function (data) {
-            renderFolderView(data, '');
-        });
 
         // Library item positions
         // Radio view
@@ -456,7 +457,7 @@ jQuery(document).ready(function ($) {
         GLOBAL.lazyCovers = false;
         makeActive('.album-view-btn', '#library-panel', 'album');
 
-        if (!GLOBAL.libRendered) {
+        if (!GLOBAL.libRendered && !GLOBAL.performanceMode) {
             loadLibrary();
         }
         $('#albumcovers .lib-entry').removeClass('active');

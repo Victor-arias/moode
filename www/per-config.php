@@ -30,12 +30,16 @@ if (isset($_POST['update_local_display'])) {
 }
 
 if (isset($_POST['update_local_display_url'])) {
-    if (isset($_POST['local_display_url']) && $_POST['local_display_url'] != $_SESSION['local_display_url']) {
-		phpSession('write', 'local_display_url', $_POST['local_display_url']);
-		if ($_POST['local_display'] == '1') {
-			submitJob('local_display_url', $_POST['local_display_url'], NOTIFY_TITLE_INFO, NAME_LOCALDISPLAY . NOTIFY_MSG_SVC_RESTARTED);
+	if (isset($_POST['local_display_url']) && $_POST['local_display_url'] != $_SESSION['local_display_url']) {
+		$url = $_POST['local_display_url'];
+		if (!empty($url) && strpos($url, 'local=1') === false) {
+			$url .= (strpos($url, '?') === false ? '?' : '&') . 'local=1';
+		}
+		phpSession('write', 'local_display_url', $url);
+		if ($_SESSION['local_display'] == '1') {
+			submitJob('local_display_url', $url, NOTIFY_TITLE_INFO, NAME_LOCALDISPLAY . NOTIFY_MSG_SVC_RESTARTED);
         } else {
-            submitJob('local_display_url', $_POST['local_display_url']);
+            submitJob('local_display_url', $url);
         }
     }
 }

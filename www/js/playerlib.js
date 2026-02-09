@@ -192,7 +192,8 @@ var GLOBAL = {
     npIcon: '',
     coverViewActive: false,
     userAgent: '',
-    ralbumClickedClearPlay: false
+    ralbumClickedClearPlay: false,
+    performanceMode: window.performanceMode || false
 };
 
 // All Library filters

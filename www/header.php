@@ -85,9 +85,12 @@
 		<script src="js/jquery.md5.js" defer></script>
 		<script src="js/jquery.knob.js" defer></script>
 		<script src="js/bootstrap-contextmenu.js" defer></script>
+		<?php if (!$isPerformanceMode) { ?>
 		<script src="js/scripts-library.js" defer></script>
+		<?php } ?>
 		<script src="js/scripts-panels.js" defer></script>
 		<!-- endbuild -->
+		<script>window.performanceMode = <?php echo $isPerformanceMode ? 'true' : 'false'; ?>;</script>
 	<!-- Configs -->
 	<!--removeIf(GENINDEXDEV)-->
 	<?php } else { ?>
@@ -107,6 +110,9 @@
 
 	<!--removeIf(GENINDEXDEV)-->
 	<?php }
+		// Performance Mode detection (Kiosk mode optimization)
+		$isPerformanceMode = (isset($_GET['local']) && $_GET['local'] === '1');
+
 		// INSTALL DISPLAY MESSAGES FUNCTION, IS ACTUALY CALLED AFTER onready by applicatio.js  |scripts-panels.js
 		if (isset($_SESSION['notify']['title']) && $_SESSION['notify']['title'] != '') {
 			uiNotify($_SESSION['notify']);
